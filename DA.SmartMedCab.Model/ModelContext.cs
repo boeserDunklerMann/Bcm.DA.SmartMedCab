@@ -15,7 +15,7 @@ namespace DA.SmartMedCab.Model
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseMySQL("Server=localhost;Database=DA_SmartMedCab;Uid=DA.SmartMedCab;Pwd=SmartMedCab.240112;Allow User Variables=true");
+			optionsBuilder.UseSqlServer("Server=.\\SQLExpress; Database=DA.SmartMedCab; Integrated Security=False; Encrypt=False;user=sa;Password=only4sus.1234");
 		}
 	}
 }

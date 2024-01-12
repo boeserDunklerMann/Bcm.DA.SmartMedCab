@@ -33,6 +33,22 @@ namespace DA.SmartMedCab.Processes
 		public async Task RunAsync()
 		{
 			var fc = await OpenMeteoAsync();
+			using (ModelContext ctx = new ModelContext())
+			{
+				var loc = ctx.Locations.FirstOrDefault(l => l.Name == "Leipzig");
+				if (loc == null)
+				{
+					throw new Exception("Location not found");
+				}
+				if (fc.weathercode != null && fc.time != null)
+					for (int i = 0; i < fc.weathercode.Length; i++)
+					{
+						WeatherData wd = new WeatherData() { CreationDate = DateTime.Now, WmoCode = fc.weathercode[i], DateTime = DateTime.Parse(fc.time[i]), ChangeDate = DateTime.Now };
+						wd.Location = loc;
+						ctx.WeatherData.Add(wd);
+					}
+				ctx.SaveChanges();
+			}
 		}
 	}
 }

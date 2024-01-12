@@ -9,12 +9,20 @@ namespace DA.SmartMedCab.ProcessServer.Test
 	{
 		static void Main(string[] args)
 		{
+			/*
 			using (Model.ModelContext context = new Model.ModelContext())
 			{
 				// create db if not exists
 				context.Database.EnsureCreated();
+				
+				Model.Location location = new Model.Location() { Latitude = 51.3396m, Longitude = 12.3713m, Name = "Leipzig" };
+
+				context.Locations.Add(location);
+
+				context.SaveChanges();
 			}
 			return;
+			*/
 
 			GlobalConfiguration.Configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
 				.UseColouredConsoleLogProvider()
