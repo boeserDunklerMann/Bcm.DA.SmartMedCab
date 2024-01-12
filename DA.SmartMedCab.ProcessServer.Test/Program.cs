@@ -9,6 +9,13 @@ namespace DA.SmartMedCab.ProcessServer.Test
 	{
 		static void Main(string[] args)
 		{
+			using (Model.ModelContext context = new Model.ModelContext())
+			{
+				// create db if not exists
+				context.Database.EnsureCreated();
+			}
+			return;
+
 			GlobalConfiguration.Configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
 				.UseColouredConsoleLogProvider()
 				.UseSimpleAssemblyNameTypeSerializer()
