@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using DA.SmartMedCab.Model;
+using Newtonsoft.Json.Linq;
 
 namespace DA.SmartMedCab.Processes
 {
@@ -11,7 +12,7 @@ namespace DA.SmartMedCab.Processes
 		/// See also: https://geocoding-api.open-meteo.com/v1/search?name=leipzig&count=10&language=de&format=json
 		/// </summary>
 		/// <returns></returns>
-		private static async Task<OpenForecast> OpenMeteoAsync()
+		private static async Task<Forecast> OpenMeteoAsync()
 		{
 			var client = new HttpClient();
 			var request = new HttpRequestMessage(HttpMethod.Get, "https://api.open-meteo.com/v1/dwd-icon?latitude=51.3396&longitude=12.3713&daily=weathercode&timezone=auto");
@@ -23,7 +24,7 @@ namespace DA.SmartMedCab.Processes
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8603
 			JToken daily = o.SelectToken("daily");
-			var forecast = daily?.ToObject<OpenForecast>();
+			var forecast = daily?.ToObject<Forecast>();
 			return forecast;
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning restore CS8603
@@ -33,10 +34,5 @@ namespace DA.SmartMedCab.Processes
 		{
 			var fc = await OpenMeteoAsync();
 		}
-	}
-	public class OpenForecast
-	{
-		public string[]? time { get; set; }
-		public int[]? weathercode { get; set; }
 	}
 }

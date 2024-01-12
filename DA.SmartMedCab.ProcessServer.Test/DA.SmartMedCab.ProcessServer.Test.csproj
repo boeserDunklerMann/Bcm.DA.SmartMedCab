@@ -12,4 +12,8 @@
     <PackageReference Include="Hangfire.MySqlStorage" Version="2.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DA.SmartMedCab.Commons\DA.SmartMedCab.Commons.csproj" />
+  </ItemGroup>
+
 </Project>

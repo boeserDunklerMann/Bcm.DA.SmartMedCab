@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using DA.SmartMedCab.Processes;
+using Hangfire;
 using Hangfire.MySql;
 using System.Transactions;
 
@@ -24,7 +25,12 @@ namespace DA.SmartMedCab.ProcessServer.Test
 					TransactionTimeout = TimeSpan.FromMinutes(1),
 					TablesPrefix = "Hangfire"
 				}));
-			BackgroundJob.Enqueue(() => Console.WriteLine("Hello from Hangfire mySQL"));
+
+			IProcess proc = Commons.ContractBinder.GetObject<IProcess>();
+			if (proc != null)
+			{
+				BackgroundJob.Enqueue(() => proc.RunAsync());
+			}
 		}
 	}
 }
